@@ -1,0 +1,90 @@
+<html>
+<head>
+<link href="https://dr.habracdn.net/habrcom/styles/1547048393/settings.bundle.css" rel="stylesheet" media="all">
+<link href="https://dr.habracdn.net/habrcom/styles/1547048393/main.bundle.css" rel="stylesheet" media="all">
+<style type="text/css">
+
+hr.btwncmnts {
+	display: block;  
+	margin-top: 0.7em;  
+	margin-bottom: 0.7em; 
+	width: 90%; 
+	height: 1px; 
+	border: none; 
+	color:#e3e3e3;
+	background-color:#e3e3e3;
+}
+
+div.menustring {
+	
+	width: 220px; 
+	display: inline-block; 
+	position: relative;
+}
+
+input.hcc_input{
+	border: 1px solid #d5dddf;
+    color: #333;
+	size: 2;
+	background: #fff;
+}
+
+input.hcc_input:focus {
+    outline: 0;
+    border-color: #a3c4e2;
+    box-shadow: none;
+    transition: border linear .2s,box-shadow linear .2s
+}
+
+#swmn {
+	opacity: 1;
+}
+</style>
+</head>
+
+<body>
+<div id="main" style="width: 350px; height: 400px; margin-left: 1em; margin-right: 1em;">
+<img src="hcc_32.png" align="left"><h2>Habr Comments Control</h2>
+
+
+<div style="display: block;">
+	<div class="menustring"><b>ВКЛЮЧИТЬ</b> </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="glblswtchid" type="checkbox"><label for="glblswtchid" class="form-checkbox__fake"></label></div>
+</div>
+<hr class="btwncmnts" style="height: 3px;">
+
+<div class="swtchmenu" id="swmn">
+<div style="display: block;" title="Отображать комментарии в хронологическом (оригинал) или случайном порядке">
+	<div class="menustring">Случайный порядок</div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_rndmsrt" type="checkbox"><label for="hcc_rndmsrt" class="form-checkbox__fake"></label></div>
+</div>
+<hr class="btwncmnts">
+
+<div style="display: block;" title="Свернуть треды. Только для корневых комментариев">
+	<div class="menustring">Свернуть ветви </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs" type="checkbox"><label for="hcc_cllpsbrnchs" class="form-checkbox__fake"></label></div>
+</div>
+<hr class="btwncmnts">
+<div style="display: block;" title="Отображать визуальный разделитель. Только между корневыми комментариями">
+	<div class="menustring">Разделитель </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_enbldvdr" type="checkbox"><label for="hcc_enbldvdr" class="form-checkbox__fake"></label></div>
+</div>
+
+<hr class="btwncmnts">
+
+<div style="display: block;" title="Не показывать оценки, в т.ч. у статей">
+	<div class="menustring">Скрыть оценки </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_hiderate" type="checkbox"><label for="hcc_hiderate" class="form-checkbox__fake"></label></div>
+</div>
+<hr class="btwncmnts">
+<div style="display: block;" title="Не затенять комментарии с рейтингом ниже нуля">
+	<div class="menustring">Отключить затенение </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_hideshdwng" type="checkbox"><label for="hcc_hideshdwng" class="form-checkbox__fake"></label></div>
+</div>
+
+<hr class="btwncmnts">
+<div style="display: block;" title="Частично скрыть комментарии с количеством символов (только текст) свыше указанного. Можно развернуть свёрнутый комментарий. Enter для сохранения">
+	<div class="menustring">Полускрыть > <input id="hcc_hidelng_lngth" class="hcc_input" type="text" value="" size="2"> симв. </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_hidelng" type="checkbox"><label for="hcc_hidelng" class="form-checkbox__fake"></label></div>
+</div>
+<hr class="btwncmnts">
+<div style="display: block;" title="Переместить комментарии с количеством символов короче указанного в низ списка. Enter для сохранения">
+	<div class="menustring">Короткие < <input id="hcc_shrt2bttm_lngth" type="text" class="hcc_input" value="" size="2"> симв. вниз </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_shrt2bttm" type="checkbox"><label for="hcc_shrt2bttm" class="form-checkbox__fake"></label></div>
+</div>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>

@@ -9,7 +9,6 @@ function hcc_start(){
 			chrome.storage.local.set({'hcc_glblswtch': '1'}, function(){
 				
 				chrome.storage.local.set({'hcc_strdsttngs': sttngsarr}, function(){
-					console.log(sttngsarr);
 					applyformat();
 				});
 			});
@@ -46,8 +45,6 @@ function addcss(css){
  }
 
 function applyformat(){
-	
-	console.log(sttngsarr);
 		
 	var rootcmnts = document.getElementById('comments-list').children;
 	
@@ -93,7 +90,6 @@ function applyformat(){
 				
 	if (sttngsarr.hcc_hidelng == '1'){ 
 		
-		console.log("hdlng");
 		for (let i=0; i < rootcmnts.length; i++){
 
 			let tmp = rootcmnts[i].querySelector("div.comment__message");
@@ -173,7 +169,6 @@ function applyformat(){
  
 function applyformat2(){
 	
-	console.log("imhere");
 	addcss('.voting-wjt__counter {visibility: hidden; display: none;');
     addcss('.comment__message_downgrade {opacity: 1 !important;}');
     

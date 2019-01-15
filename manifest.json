@@ -14,6 +14,9 @@
 		"https://habr.com/post/*",
 		"https://habr.com/company/*",
 		"https://habr.com/article/*",
+		"https://habr.com/*/post/*",
+		"https://habr.com/*/company/*",
+		"https://habr.com/*/article/*",
 		"storage"
 	],
 	"browser_action": {
@@ -24,7 +27,7 @@
 	"content_scripts": [
 		{
 		  "all_frames": true,
-		  "matches": [ "https://habr.com/post/*", "https://habr.com/company/*", "https://habr.com/article/*" ],
+		  "matches": [ "https://habr.com/post/*", "https://habr.com/company/*", "https://habr.com/article/*", "https://habr.com/*/post/*", "https://habr.com/*/company/*", "https://habr.com/*/article/*" ],
 		  "js": [ "client.js" ],
 		  "run_at": "document_end"
 		}

@@ -57,7 +57,6 @@ function input_savestatenrld(){
 	chrome.storage.local.set({hcc_strdsttngs: popupstngsarr},function(){
 			
 		window.location.reload(true);		
-		//currTabId = browser.tabs.query({currentWindow: true, active: true});
 		chrome.tabs.executeScript(null,{code: "window.location = window.location;"});
 	});
 }
@@ -80,7 +79,6 @@ document.getElementById("glblswtchid").addEventListener("click", function(){
 		chrome.browserAction.setIcon({ path: 'hcc_64_dsbld.png'});
 	}
 
-	//currTabId = browser.tabs.query({currentWindow: true, active: true});
 	chrome.tabs.executeScript(null,{code: "window.location = window.location;"});
 	
 	window.location.reload(true);

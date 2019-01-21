@@ -12,7 +12,6 @@ function hcc_start(){
 					applyformat();
 				});
 			});
-			//hcc_setup();
 		}
 		
 		if (result.hcc_glblswtch == '1') {
@@ -24,11 +23,6 @@ function hcc_start(){
 			});	
 		}		
 	});
-}
-
-function hcc_setup(){
-	
-	chrome.storage.local.set({hcc_strdsttngs: sttngsarr}, function(){});
 }
 
 function addcss(css){
@@ -48,7 +42,7 @@ function applyformat(){
 		
 	var rootcmnts = document.getElementById('comments-list').children;
 	
-	if (sttngsarr.hcc_hiderate == '1'){ addcss('.voting-wjt__counter {visibility: hidden; display: none;');}
+	if (sttngsarr.hcc_hiderate == '1'){ addcss('span.voting-wjt__counter {visibility: hidden; display: none;');}
 	
 	if (sttngsarr.hcc_hideshdwng == '1'){ addcss('.comment__message_downgrade {opacity: 1 !important;}');}
 	
@@ -74,7 +68,21 @@ function applyformat(){
 			if ( tmp3 > 0 ) {
 				
 				let tmpid = rootcmnts[i].querySelector('ul.content-list_nested-comments').id;
-				tmphtml.outerHTML = "<input class=\"brtggl\" type=\"checkbox\" id=\"tggl_"+tmpid+"\"><label class=\"cmmtggl\" for=\"tggl_"+tmpid+"\" id=\"ltggl_"+tmpid+"\"></label>" + tmphtml.outerHTML;
+				
+				/* 
+				when outerHTML is modified, original inline scripts become unsafe for Chrome
+				and original page functionality may be broken
+				so we must do 8 strings instead of one to make it safe
+				*/
+				//tmphtml.outerHTML = "<input class=\"brtggl\" type=\"checkbox\" id=\"tggl_"+tmpid+"\"><label class=\"cmmtggl\" for=\"tggl_"+tmpid+"\" id=\"ltggl_"+tmpid+"\"></label>" + tmphtml.outerHTML;
+				
+				let tmpipt = document.createElement("input"); 
+				tmpipt.className = "brtggl"; tmpipt.type = "checkbox"; tmpipt.id = "tggl_"+tmpid;
+				
+				let tmplbl = document.createElement("label"); 
+				tmplbl.className = "cmmtggl"; tmplbl.htmlFor = "tggl_"+tmpid; tmplbl.id = "ltggl_"+tmpid;
+				
+				rootcmnts[i].insertBefore(tmpipt,tmphtml); rootcmnts[i].insertBefore(tmplbl,tmphtml);
 				
 				addcss('#'+tmpid+' {visibility: hidden; display: none;}');
 				addcss('#tggl_'+tmpid+':checked ~ #'+tmpid+'{visibility: visible; display: block;}');
@@ -83,7 +91,6 @@ function applyformat(){
 				
 				addcss('#ltggl_'+tmpid+'::after {content: \"\\0020 '+tmpamnt+'\"}');
 				
-				rootcmnts[i].querySelector('ul.content-list_nested-comments').outerHTML = tmphtml.outerHTML;
 			}
 		}
 	}
@@ -105,159 +112,51 @@ function applyformat(){
 			}
 		}
 	}
+			
+	if (sttngsarr.hcc_rndmsrt == '1'){
+		
+		var rootdiv = document.getElementById('comments-list');
+		var i = 0;
 	
-	var rtcmntsarr = [];
-    var shrtcmntsarr = [];
-    let ii = 0;
-    
-	for (let i=0; i < rootcmnts.length; i++ ) {
-
-        let tmp = rootcmnts[i].querySelector("div.comment__message");
-		if (sttngsarr.hcc_shrt2bttm == '1'){
-			if (tmp.innerHTML.length < Number(sttngsarr.hcc_shrt2bttm_lngth)) {
-
-				shrtcmntsarr[ii++] = rootcmnts[i].outerHTML;
-				//if (sttngsarr.hcc_enbldvdr == '1') {shrtcmntsarr[ii++] += "<hr class=\"btwncmnts\">";}
-				continue;
-			};
+		while (rootcmnts.length > i){
+			
+			let tmp = Math.floor(Math.random() * (rootcmnts.length-i));
+			tmp += i; 
+			rootdiv.insertBefore(rootcmnts[tmp], rootcmnts[i]);
+			i++;
 		}
-        rtcmntsarr[i-ii] = rootcmnts[i].outerHTML;
-        //if (sttngsarr.hcc_enbldvdr == '1') {rtcmntsarr[i-ii] += "<hr class=\"btwncmnts\">";}
-    }
+	}
 	
+	if (sttngsarr.hcc_shrt2bttm == '1'){
+				
+		var shtlng = Number(sttngsarr.hcc_shrt2bttm_lngth);
+		var iend = 0;
+		for (let i=0; i < rootcmnts.length-iend; i++){
+			
+			let tmp = rootcmnts[i].querySelector("div.comment__message");
+			if (tmp.innerHTML.length < shtlng) {
+				
+				rootdiv.appendChild(rootcmnts[i]);
+				iend++; i--;
+			}
+		}
+	}
+		
 	if (sttngsarr.hcc_enbldvdr == '1') {
 		
-		let i=0;
-		while (i < rtcmntsarr.length) {rtcmntsarr[i++] += "<hr class=\"btwncmnts\">";}
-		i=0;
-		while (i < shrtcmntsarr.length) {shrtcmntsarr[i++] += "<hr class=\"btwncmnts\">";}
-	}
-
-	var bigstr = "";
-	
-	if (sttngsarr.hcc_rndmsrt == '1'){
-		while ( rtcmntsarr.length > 0){
-
-			let tmp2 = Math.floor(Math.random() * rtcmntsarr.length);
-			bigstr += rtcmntsarr[tmp2];
-			rtcmntsarr.splice(tmp2,1);
-		}
-
-		while ( shrtcmntsarr.length > 0){
-
-			let tmp2 = Math.floor(Math.random() * shrtcmntsarr.length);
-			bigstr += shrtcmntsarr[tmp2];
-			shrtcmntsarr.splice(tmp2,1);
+		var hr = document.createElement("hr");
+		hr.className = "btwncmnts";
+		var rt = document.getElementById('comments-list');
+		
+		for (let i = 0; i < rootcmnts.length; i+=2) {
+			
+			//if not clone, we got one element moving to bottom of list
+			let cln = hr.cloneNode(true);
+			rt.insertBefore(cln, rt.children[i+1]);
 		}
 	}
-	else{
-		
-		rtcmntsarr.foreach(function(item){
-			bigstr += item;
-		});
-		
-		shrtcmntsarr.foreach(function(item){
-			bigstr += item;
-		});
-	}
-
-	//document.getElementById("comments-list").innerHTML = "";
-    document.getElementById("comments-list").innerHTML = bigstr;
 	
 } 
  
- 
-function applyformat2(){
-	
-	addcss('.voting-wjt__counter {visibility: hidden; display: none;');
-    addcss('.comment__message_downgrade {opacity: 1 !important;}');
-    
-	addcss('hr.btwncmnts {display: block;  margin-top: 2em;  margin-bottom: 2em; width: 90%; height: 1px; border: none; color:#e3e3e3;background-color:#e3e3e3;}');
-
-    addcss('.brtggl {visibility: hidden; display: none;} label.cmmtggl {display: block; color: #666;}');
-
-    addcss('label.cmmtggl::before {font-weight: normal; font-size: 16px; content: "\\1f4ac h"; vertical-align: middle; display: inline-block; width: 2em; background: #f7f7f7; text-align: center;}'); //\\16A5
-
-    addcss('label.lngcmmtggl {vertical-align: middle; font-style: italic; display: block; text-align: center; width: 100%; color: #bbb; }');
-
-    addcss('.brtggl:checked ~ label.cmmtggl::before { content: "–";}');
-
-    addcss('div.lngcmmnt { width: 100%; max-height: 8em; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0)); -webkit-mask-size: 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: 100% 50%;}');
-
-    let rootcmnts = document.getElementById('comments-list').children;
-
-    for (let i=0; i < rootcmnts.length; i++ ){
-
-		let tmphtml = (rootcmnts[i].querySelector('ul.content-list_nested-comments')); //.getElementsByTagName("ul")
-        let tmp3 = tmphtml.children.length;
-		if ( tmp3 > 0 ) {
-			let tmpid = rootcmnts[i].querySelector('ul.content-list_nested-comments').id;
-			tmphtml.outerHTML = "<input class=\"brtggl\" type=\"checkbox\" id=\"tggl_"+tmpid+"\"><label class=\"cmmtggl\" for=\"tggl_"+tmpid+"\" id=\"ltggl_"+tmpid+"\"></label>" + tmphtml.outerHTML;
-			addcss('#'+tmpid+' {visibility: hidden; display: none;}');
-			addcss('#tggl_'+tmpid+':checked ~ #'+tmpid+'{visibility: visible; display: block;}');
-            var tmpamnt = rootcmnts[i].querySelectorAll('li.content-list__item_comment').length;
-            addcss('#ltggl_'+tmpid+'::after {content: \"\\0020 '+tmpamnt+'\"}');
-			rootcmnts[i].querySelector('ul.content-list_nested-comments').outerHTML = tmphtml.outerHTML;
-		}
-	}
-
-    for (let i=0; i < rootcmnts.length; i++){
-
-        let tmp = rootcmnts[i].querySelector("div.comment__message");
-		if (tmp.innerHTML.length < 64);
-
-        if (tmp.innerHTML.length > 400) {
-
-            let tmpid = rootcmnts[i].querySelector('div.comment').id;
-            tmp.classList.add("lngcmmnt"); tmp.id = ("lngcmmnt_"+tmpid);
-            tmp.outerHTML = "<input class=\"brtggl\" type=\"checkbox\" id=\"lngcmnttggl_"+tmpid+"\">"+tmp.outerHTML+"<label class=\"lngcmmtggl\" for=\"lngcmnttggl_"+tmpid+"\" id=\"lntggl_"+tmpid+"\">развернуть</label>";
-
-            addcss('#lngcmnttggl_'+tmpid+':checked ~ #lngcmmnt_'+tmpid+' {max-height: none; -webkit-mask-image:none}'); //#lntggl_'+tmpid+'{visibility: hidden; display:none;} -webkit-mask-image: none;
-            addcss('#lngcmnttggl_'+tmpid+':checked ~ #lntggl_'+tmpid+'{visibility: hidden; display:none;}'); //-webkit-mask-image: none;
-        };
-	}
-
-    var rtcmntsarr = [];
-    var shrtcmntsarr = [];
-    let ii = 0;
-    for (let i=0; i < rootcmnts.length; i++ ) {
-
-        let tmp = rootcmnts[i].querySelector("div.comment__message");
-		if (tmp.innerHTML.length < 64) {
-
-            shrtcmntsarr[ii] = rootcmnts[i].outerHTML;
-            shrtcmntsarr[ii++] += "<hr class=\"btwncmnts\">";
-            //i--;
-            continue;
-        };
-
-        rtcmntsarr[i-ii] = rootcmnts[i].outerHTML;
-        rtcmntsarr[i-ii] += "<hr class=\"btwncmnts\">";
-    }
-
-    document.getElementById("comments-list").innerHTML = "";
-
-    //var cmntshtml = document.getElementById("comments-list");
-
-    var bigstr = "";
-    //var i = 0;
-	while ( rtcmntsarr.length > 0){
-
-		let tmp2 = Math.floor(Math.random() * rtcmntsarr.length);
-		bigstr += rtcmntsarr[tmp2];
-		rtcmntsarr.splice(tmp2,1);
-
-	}
-
-    while ( shrtcmntsarr.length > 0){
-
-		let tmp2 = Math.floor(Math.random() * shrtcmntsarr.length);
-		bigstr += shrtcmntsarr[tmp2];
-		shrtcmntsarr.splice(tmp2,1);
-
-	}
-
-    document.getElementById("comments-list").innerHTML = bigstr;
-}
- 
-window.addEventListener('DOMContentLoaded', hcc_start());
+//window.addEventListener('DOMContentLoaded', hcc_start());
+window.addEventListener('load', hcc_start());

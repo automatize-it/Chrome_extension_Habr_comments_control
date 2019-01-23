@@ -15,6 +15,7 @@ function popuphndlr(){
 			
 			document.getElementById('glblswtchid').checked = false;
 			document.getElementById('swmn').style.opacity = 0.4;
+			document.getElementById('swmn').style.cursor = "not-allowed";
 			hcc_enabled = false;
 		}
 		
@@ -26,6 +27,30 @@ function popuphndlr(){
 				
 				let tmp = document.getElementById(key);
 				if (tmp == null) continue;
+				
+				if (key == "hcc_cllpsbrnchs"){
+					
+					if (popupstngsarr[key] == '1') {
+						document.getElementById("brnchssubmn").style.opacity = "1";
+					}
+					else {
+						document.getElementById("brnchssubmn").style.opacity = "0.4";
+						document.getElementById("hcc_cllpsbrnchs_all").disabled = true;
+						document.getElementById("hcc_cllpsbrnchs_rev").disabled = true;
+					}
+				}
+				
+				if (key == "hcc_hiderate"){
+					
+					if (popupstngsarr[key] == '1') {
+						document.getElementById("votessubmn").style.opacity = "1";
+					}
+					else {
+						document.getElementById("votessubmn").style.opacity = "0.4";
+						document.getElementById("hcc_hiderate_u").disabled = true;
+					}
+				}
+				
 				if (tmp.className == "hcc_input"){
 					
 					tmp.value = popupstngsarr[key];
@@ -43,10 +68,12 @@ function popuphndlr(){
 					tmp.disabled = true;	
 				}
 				
+				/*
 				var tmp = document.getElementsByClassName('addon');
 				for (i=0; i < tmp.length; i++){
 					tmp[i].readOnly = true;
 				}
+				*/
 			}
 		});
 	});

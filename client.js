@@ -1,4 +1,4 @@
-﻿var sttngsarr = {'hcc_rndmsrt': '0', 'hcc_cllpsbrnchs': '0', 'hcc_enbldvdr': '0', 'hcc_hiderate': '0', 'hcc_hideshdwng': '0', 'hcc_hidelng': '0', 'hcc_shrt2bttm': '0', 'hcc_hidelng_lngth': '420', 'hcc_shrt2bttm_lngth': '50'};
+﻿var sttngsarr = {'hcc_rndmsrt': '0', 'hcc_cllpsbrnchs': '0', 'hcc_cllpsbrnchs_all':'0', 'hcc_cllpsbrnchs_rev':'0', 'hcc_enbldvdr': '0', 'hcc_hiderate': '0', 'hcc_hiderate_u':'0', 'hcc_hideshdwng': '0', 'hcc_hidelng': '0', 'hcc_shrt2bttm': '0', 'hcc_hidelng_lngth': '420', 'hcc_shrt2bttm_lngth': '50'};
 
 function hcc_start(){
 	
@@ -38,11 +38,31 @@ function addcss(css){
     head.appendChild(s);
  }
 
+
+ 
 function applyformat(){
 		
 	var rootcmnts = document.getElementById('comments-list').children;
 	
-	if (sttngsarr.hcc_hiderate == '1'){ addcss('span.voting-wjt__counter {visibility: hidden; display: none;');}
+	if (sttngsarr.hcc_hiderate == '1'){ 
+		
+		addcss('span.voting-wjt__counter {visibility: hidden; display: none;');
+	
+		//unhide if voted
+		if (sttngsarr.hcc_hiderate_u == '1'){ 
+			
+			let tmp = document.querySelectorAll("div.voting-wjt_comments");
+			for (let item of tmp){
+				
+				if (item.querySelector("button.voting-wjt__button").title.includes("Вы")){
+					
+					let tmpspan = item.querySelector("span.voting-wjt__counter");
+					tmpspan.style.visibility = "visible";
+					tmpspan.style.display = "flex"; 
+				}
+			}
+		}
+	}
 	
 	if (sttngsarr.hcc_hideshdwng == '1'){ addcss('.comment__message_downgrade {opacity: 1 !important;}');}
 	
@@ -56,25 +76,34 @@ function applyformat(){
 	}
 					
 	if (sttngsarr.hcc_cllpsbrnchs == '1'){  
+				
+		addcss('.brtggl {visibility: hidden; display: none;}'); 
+				
+		addcss('label.cmmtggl {display: block; color: #666;}');
 		
-		addcss('.brtggl {visibility: hidden; display: none;} label.cmmtggl {display: block; color: #666;}');
-		addcss('label.cmmtggl::before {font-weight: normal; font-size: 16px; content: "\\1f4ac h"; vertical-align: middle; display: inline-block; width: 2em; background: #f7f7f7; text-align: center;}');
-		addcss('.brtggl:checked ~ label.cmmtggl::before { content: "–";}');
+		if (sttngsarr.hcc_cllpsbrnchs_rev == '0'){
+			addcss('label.cmmtggl::before {font-weight: normal; font-size: 16px; content: "\\1f4ac h"; vertical-align: middle; display: inline-block; width: 2em; background: #f7f7f7; text-align: center;}');
+			addcss('.brtggl:checked ~ label.cmmtggl::before { content: "–";}');
+		} else {
+			
+			addcss('label.cmmtggl::before {font-weight: normal; font-size: 16px; content: "–"; vertical-align: middle; display: inline-block; width: 2em; background: #f7f7f7; text-align: center;}');
+			addcss('.brtggl:checked ~ label.cmmtggl::before { content: "\\1f4ac h";}');
+		}
 		
 		for (let i=0; i < rootcmnts.length; i++ ){
-
-			let tmphtml = (rootcmnts[i].querySelector('ul.content-list_nested-comments')); //.getElementsByTagName("ul")
-			let tmp3 = tmphtml.children.length;
-			if ( tmp3 > 0 ) {
+			
+			let brnchs = rootcmnts[i].querySelectorAll('ul.content-list_nested-comments');
+			
+			for (let brnch of brnchs){
 				
-				let tmpid = rootcmnts[i].querySelector('ul.content-list_nested-comments').id;
+				let amnt = brnch.children.length;
+				if (amnt == 0) continue;
 				
-				/* 
-				when outerHTML is modified, original inline scripts become unsafe for Chrome
-				and original page functionality may be broken
-				so we must do 8 strings instead of one to make it safe
-				*/
-				//tmphtml.outerHTML = "<input class=\"brtggl\" type=\"checkbox\" id=\"tggl_"+tmpid+"\"><label class=\"cmmtggl\" for=\"tggl_"+tmpid+"\" id=\"ltggl_"+tmpid+"\"></label>" + tmphtml.outerHTML;
+				if (sttngsarr.hcc_cllpsbrnchs_all == '0'){ 
+					if (brnch.parentNode.parentNode.id != "comments-list") continue;
+				}
+				
+				let tmpid = brnch.id;
 				
 				let tmpipt = document.createElement("input"); 
 				tmpipt.className = "brtggl"; tmpipt.type = "checkbox"; tmpipt.id = "tggl_"+tmpid;
@@ -82,17 +111,26 @@ function applyformat(){
 				let tmplbl = document.createElement("label"); 
 				tmplbl.className = "cmmtggl"; tmplbl.htmlFor = "tggl_"+tmpid; tmplbl.id = "ltggl_"+tmpid;
 				
-				rootcmnts[i].insertBefore(tmpipt,tmphtml); rootcmnts[i].insertBefore(tmplbl,tmphtml);
+				brnch.parentNode.insertBefore(tmpipt,brnch); brnch.parentNode.insertBefore(tmplbl,brnch);
 				
-				addcss('#'+tmpid+' {visibility: hidden; display: none;}');
-				addcss('#tggl_'+tmpid+':checked ~ #'+tmpid+'{visibility: visible; display: block;}');
+				if (sttngsarr.hcc_cllpsbrnchs_rev == '0'){  
+					
+					addcss('#'+tmpid+' {visibility: hidden; display: none;}');
+					addcss('#tggl_'+tmpid+':checked ~ #'+tmpid+'{visibility: visible; display: block;}');
+				}
+				else {
+					
+					addcss('#'+tmpid+' {visibility: visible; display: block;}');
+					addcss('#tggl_'+tmpid+':checked ~ #'+tmpid+'{visibility: hidden; display: none;}');
+				}
 				
-				var tmpamnt = rootcmnts[i].querySelectorAll('li.content-list__item_comment').length;
+				
+				let tmpamnt = brnch.querySelectorAll('li.content-list__item_comment').length;
 				
 				addcss('#ltggl_'+tmpid+'::after {content: \"\\0020 '+tmpamnt+'\"}');
-				
 			}
 		}
+			
 	}
 				
 	if (sttngsarr.hcc_hidelng == '1'){ 
@@ -160,3 +198,33 @@ function applyformat(){
  
 //window.addEventListener('DOMContentLoaded', hcc_start());
 window.addEventListener('load', hcc_start());
+
+document.getElementById("comments").addEventListener("click", function(event){
+	
+	
+	if (event == null || sttngsarr.hcc_hiderate_u == '0') return;
+	var clckdlmnt = event.target;
+	
+	var i = 0;
+	while (clckdlmnt.parentNode) {
+        if (i > 5) break;
+		clckdlmnt = clckdlmnt.parentNode;
+		if (clckdlmnt.classList.contains("voting-wjt_comments")) {
+			
+			let tmpspan = clckdlmnt.querySelector("span.voting-wjt__counter");
+			
+			var observer = new MutationObserver(function() {
+				
+				let tmpspan = clckdlmnt.querySelector("span.voting-wjt__counter");
+				tmpspan.setAttribute("style", "visibility: visible; display: flex;");
+				
+				observer.disconnect();				
+			});
+			
+			var config = { attributes: true, childList: false, characterData: false, subtree: false };
+			// Start observing the target node for configured mutations
+			observer.observe(tmpspan.parentNode, config);
+		}
+		i++;
+	}
+});

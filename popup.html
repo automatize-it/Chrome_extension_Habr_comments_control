@@ -40,11 +40,17 @@ input.hcc_input:focus {
 #swmn {
 	opacity: 1;
 }
+
+#votessubmn, #brnchssubmn {
+	
+	opacity: 0.4;
+}
+
 </style>
 </head>
 
 <body style="height: auto;">
-<div id="main" style="width: 350px; height: 400px; margin-left: 1em; margin-right: 1em; margin-top: 1em;">
+<div id="main" style="width: 350px; height: auto; margin: 1em;">
 <img src="hcc_32.png" align="left"><h2>Habr Comments Control</h2>
 
 
@@ -62,6 +68,15 @@ input.hcc_input:focus {
 <div style="display: block;" title="Свернуть треды. Только для корневых комментариев">
 	<div class="menustring">Свернуть ветви </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs" type="checkbox"><label for="hcc_cllpsbrnchs" class="form-checkbox__fake"></label></div>
 </div>
+<div id="brnchssubmn">
+<div style="display: block;" title="Свернуть все ветви">
+	<div class="menustring" style="">&nbsp;&nbsp;&nbsp;и дочерние </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs_all" type="checkbox"><label for="hcc_cllpsbrnchs_all" class="form-checkbox__fake"></label></div>
+</div>
+<div style="display: block;" title="Показывать все ветви изначально развернутыми">
+	<div class="menustring" style="">&nbsp;&nbsp;&nbsp;развернуть по умолчанию </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs_rev" type="checkbox"><label for="hcc_cllpsbrnchs_rev" class="form-checkbox__fake"></label></div>
+</div>
+</div>
+
 <hr class="btwncmnts">
 <div style="display: block;" title="Отображать визуальный разделитель. Только между корневыми комментариями">
 	<div class="menustring">Разделитель </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_enbldvdr" type="checkbox"><label for="hcc_enbldvdr" class="form-checkbox__fake"></label></div>
@@ -69,8 +84,14 @@ input.hcc_input:focus {
 
 <hr class="btwncmnts">
 
+
 <div style="display: block;" title="Не показывать оценки, в т.ч. у статей">
 	<div class="menustring">Скрыть оценки </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_hiderate" type="checkbox"><label for="hcc_hiderate" class="form-checkbox__fake"></label></div>
+</div>
+<div id="votessubmn">
+<div style="display: block;" title="Показать оценку после вашего голоса">
+	<div class="menustring" style="">&nbsp;&nbsp;&nbsp;до голосования </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_hiderate_u" type="checkbox"><label for="hcc_hiderate_u" class="form-checkbox__fake"></label></div>
+</div>
 </div>
 <hr class="btwncmnts">
 <div style="display: block;" title="Не затенять комментарии с рейтингом ниже нуля">

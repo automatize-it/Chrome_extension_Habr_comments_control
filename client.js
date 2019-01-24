@@ -1,4 +1,25 @@
-﻿var sttngsarr = {'hcc_rndmsrt': '0', 'hcc_cllpsbrnchs': '0', 'hcc_cllpsbrnchs_all':'0', 'hcc_cllpsbrnchs_rev':'0', 'hcc_enbldvdr': '0', 'hcc_hiderate': '0', 'hcc_hiderate_u':'0', 'hcc_hideshdwng': '0', 'hcc_hidelng': '0', 'hcc_shrt2bttm': '0', 'hcc_hidelng_lngth': '420', 'hcc_shrt2bttm_lngth': '50'};
+﻿var sttngsarr = {'hcc_rndmsrt': '0', 'hcc_cllpsbrnchs': '0', 'hcc_cllpsbrnchs_all':'0', 'hcc_cllpsbrnchs_rev':'0', 'hcc_enbldvdr': '0', 'hcc_hiderate': '0', 'hcc_hiderate_u':'0', 'hcc_hideshdwng': '0', 'hcc_shwusrnt': '0', 'hcc_hidelng': '0', 'hcc_shrt2bttm': '0', 'hcc_hidelng_lngth': '420', 'hcc_shrt2bttm_lngth': '50'};
+
+String.prototype.trim = function () {
+    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+};
+
+String.prototype.rmnlns = function () {
+    return this.replace(/(\r\n|\n|\r)/gm, " ");
+};
+
+function addcss(css){
+	
+    var head = document.getElementsByTagName('head')[0];
+    var s = document.createElement('style');
+    s.setAttribute('type', 'text/css');
+    if (s.styleSheet) {   // IE
+        s.styleSheet.cssText = css;
+    } else {                // the world
+        s.appendChild(document.createTextNode(css));
+    }
+    head.appendChild(s);
+}
 
 function hcc_start(){
 	
@@ -24,20 +45,6 @@ function hcc_start(){
 		}		
 	});
 }
-
-function addcss(css){
-	
-    var head = document.getElementsByTagName('head')[0];
-    var s = document.createElement('style');
-    s.setAttribute('type', 'text/css');
-    if (s.styleSheet) {   // IE
-        s.styleSheet.cssText = css;
-    } else {                // the world
-        s.appendChild(document.createTextNode(css));
-    }
-    head.appendChild(s);
- }
-
 
  
 function applyformat(){
@@ -194,8 +201,69 @@ function applyformat(){
 		}
 	}
 	
+	if (sttngsarr.hcc_shwusrnt == '1') {
+		
+		getntsdata();
+	}
+		
+}
+
+
+function getntsdata(){
+	
+	var theUrl = "https://habr.com/ru/users/"; //notes
+	var user = "";
+	
+	user = document.querySelector("span.user-info__nickname").innerText;
+	
+	var xmlHttp = new XMLHttpRequest();
+    
+    xmlHttp.open("GET", theUrl+user+"/notes/", true); // true for asynchronous 
+    
+	xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+			addusrnts(xmlHttp.responseText);
+		}
+    }
+	
+	xmlHttp.send(null);
+	
+}
+
+function addusrnts(dcmnt){
+	
+	var parser = new DOMParser();
+	var tmp = parser.parseFromString(dcmnt.toString(), "text/html");
+	var usrnms = tmp.querySelectorAll("td.notes-table__username");
+	var usrnts = tmp.querySelectorAll("td.notes-table__desc");
+	addcss("div.usernotes{font-size: 0.8em; margin: 0.5em;padding: 0.5em;background-color:#fff7d7;}");
+	
+	var usrsincmmnts = document.getElementsByClassName("user-info_inline");
+	
+	for (let i=0; i< usrsincmmnts.length; i++){
+		
+		var tmpusrnm = usrsincmmnts[i].dataset.userLogin;
+		for (let ii=0; ii<usrnms.length; ii++){
+			if (tmpusrnm == usrnms[ii].innerText.trim()){
+				
+				console.log("gotcha");
+				let tmpparent = usrsincmmnts[i].parentNode;
+				let tmpref = tmpparent.querySelector("time");
+				let tmphtml = document.createElement("div");
+				let tmptext = usrnts[ii].innerText.rmnlns();
+				tmptext = tmptext.substring(0, 60); 
+				if (usrnts[ii].innerText.length > 60) tmptext += "...";
+				tmphtml.className = "usernotes"; tmphtml.innerText = tmptext;
+				tmphtml.setAttribute('title', usrnts[ii].innerText);
+				tmpparent.insertBefore(tmphtml, tmpref);
+			}
+		}
+	}
+	
+	//console.log(tmp.querySelector("td.notes-table__username").innerText.trim());
+	//console.log(tmp.querySelector("td.notes-table__desc").innerText	
 } 
- 
+
 //window.addEventListener('DOMContentLoaded', hcc_start());
 window.addEventListener('load', hcc_start());
 

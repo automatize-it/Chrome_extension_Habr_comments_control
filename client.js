@@ -161,10 +161,11 @@ function applyformat(){
 			}
 		}
 	}
-			
+	
+	var rootdiv = document.getElementById('comments-list');
+	
 	if (sttngsarr.hcc_rndmsrt == '1'){
 		
-		var rootdiv = document.getElementById('comments-list');
 		var i = 0;
 	
 		while (rootcmnts.length > i){
@@ -191,6 +192,24 @@ function applyformat(){
 		}
 	}
 		
+	//expand branch if url is for direct comment 
+	if (sttngsarr.hcc_cllpsbrnchs == '1' && (window.location.href).includes("#comment_") ){
+		
+		let cmnt = window.location.href;
+		cmnt = cmnt.substring(cmnt.indexOf("#"),cmnt.Length);
+		let tmp = document.querySelector(cmnt);
+		
+		while (tmp.parentNode){
+			
+			tmp = tmp.parentNode;
+			if (tmp.className == "comments-list") break;
+			let tmpinpt = tmp.querySelector('input[class=brtggl]');
+			if (tmpinpt) tmpinpt.checked = true;
+			
+		}
+	}
+	//https://habr.com/ru/company/fbk/blog/347312/#comment_10635686
+	
 	if (sttngsarr.hcc_enbldvdr == '1') {
 		
 		var hr = document.createElement("hr");
@@ -250,7 +269,7 @@ function addusrnts(dcmnt){
 		for (let ii=0; ii<usrnms.length; ii++){
 			if (tmpusrnm == usrnms[ii].innerText.trim()){
 				
-				console.log("gotcha");
+				//console.log("gotcha");
 				let tmpparent = usrsincmmnts[i].parentNode;
 				let tmpref = tmpparent.querySelector("time");
 				let tmphtml = document.createElement("div");
@@ -263,9 +282,7 @@ function addusrnts(dcmnt){
 			}
 		}
 	}
-	
-	//console.log(tmp.querySelector("td.notes-table__username").innerText.trim());
-	//console.log(tmp.querySelector("td.notes-table__desc").innerText	
+			
 } 
 
 //window.addEventListener('DOMContentLoaded', hcc_start());

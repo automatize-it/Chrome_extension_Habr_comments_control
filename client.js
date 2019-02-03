@@ -76,7 +76,11 @@ function applyformat(){
 	if (sttngsarr.hcc_enbldvdr == '1') {addcss('hr.btwncmnts {display: block;  margin-top: 2em;  margin-bottom: 2em; width: 90%; height: 1px; border: none; color:#e3e3e3;background-color:#e3e3e3;}');}
 	
 	if (sttngsarr.hcc_hidelng == '1') { 
-	
+		
+		addcss('.brtggl {visibility: hidden; display: none;}'); 
+				
+		addcss('label.cmmtggl {display: block; color: #666;}');
+		
 		addcss('div.lngcmmnt { width: 100%; max-height: 8em; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0)); -webkit-mask-size: 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: 100% 50%;}'); 
 		
 		addcss('label.lngcmmtggl {vertical-align: middle; font-style: italic; display: block; text-align: center; width: 100%; color: #bbb; }');

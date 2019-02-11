@@ -1,8 +1,9 @@
 {
 	"manifest_version": 2,
 	"name": "Habr comments control",
-	"version": "0.4.3",
-	"description": "Этот аддон позволяет настраивать некоторые параметры просмотра комментариев на habr.ru: сворачивать ветви и прочее",
+	"version": "0.5",
+	"description": "Позволяет настраивать просмотр комментариев на habr.com: сворачивать ветви и прочее. Add-on provides visual options for comments on habr.com.",
+	"default_locale": "ru",
  	"icons": {
 		"32": "hcc_32.png",
 		"64": "hcc_64.png",

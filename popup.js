@@ -3,6 +3,9 @@ var hcc_enabled = false;
 
 function popuphndlr(){
 	
+	//translation
+	localize_menu();
+	
 	chrome.storage.local.get('hcc_glblswtch', function (result) {
 		
 		if (result.hcc_glblswtch == '1'){
@@ -77,6 +80,44 @@ function popuphndlr(){
 			}
 		});
 	});
+}
+
+function localize_menu(){
+	
+	//let's indian dance begin!!11
+	document.getElementById('ppp_mn_1').innerText = chrome.i18n.getMessage("ppp_mn_1");
+	
+	document.getElementById('ppp_mn_2').innerText = chrome.i18n.getMessage("ppp_mn_2");
+	document.getElementById('ppp_mn_2_ttl').title = chrome.i18n.getMessage("ppp_mn_2_ttl");
+	
+	document.getElementById('ppp_mn_3').innerText = chrome.i18n.getMessage("ppp_mn_3");
+	document.getElementById('ppp_mn_3_ttl').title = chrome.i18n.getMessage("ppp_mn_3_ttl");
+	document.getElementById('ppp_mn_3_1').innerText = chrome.i18n.getMessage("ppp_mn_3_1");
+	document.getElementById('ppp_mn_3_1_ttl').title = chrome.i18n.getMessage("ppp_mn_3_1_ttl");
+	document.getElementById('ppp_mn_3_2').innerText = chrome.i18n.getMessage("ppp_mn_3_2");
+	document.getElementById('ppp_mn_3_2_ttl').title = chrome.i18n.getMessage("ppp_mn_3_2_ttl");
+	
+	document.getElementById('ppp_mn_4').innerText = chrome.i18n.getMessage("ppp_mn_4");
+	document.getElementById('ppp_mn_4_ttl').title = chrome.i18n.getMessage("ppp_mn_4_ttl");
+	
+	document.getElementById('ppp_mn_5').innerText = chrome.i18n.getMessage("ppp_mn_5");
+	document.getElementById('ppp_mn_5_ttl').title = chrome.i18n.getMessage("ppp_mn_5_ttl");
+	document.getElementById('ppp_mn_5_1').innerText = chrome.i18n.getMessage("ppp_mn_5_1");
+	document.getElementById('ppp_mn_5_1_ttl').title = chrome.i18n.getMessage("ppp_mn_5_1_ttl");
+	
+	document.getElementById('ppp_mn_6').innerText = chrome.i18n.getMessage("ppp_mn_6");
+	document.getElementById('ppp_mn_6_ttl').title = chrome.i18n.getMessage("ppp_mn_6_ttl");
+	
+	var tmp = document.getElementById('ppp_mn_7');
+	tmp.innerHTML = chrome.i18n.getMessage("ppp_mn_7")+tmp.innerHTML+chrome.i18n.getMessage("symb");
+	document.getElementById('ppp_mn_7_ttl').title = chrome.i18n.getMessage("ppp_mn_7_ttl");
+	
+	tmp = document.getElementById('ppp_mn_8');
+	tmp.innerHTML = chrome.i18n.getMessage("ppp_mn_8")+tmp.innerHTML+chrome.i18n.getMessage("symb");
+	document.getElementById('ppp_mn_8_ttl').title = chrome.i18n.getMessage("ppp_mn_8_ttl");
+	
+	document.getElementById('ppp_mn_9').innerText = chrome.i18n.getMessage("ppp_mn_9");
+	document.getElementById('ppp_mn_9_ttl').title = chrome.i18n.getMessage("ppp_mn_9_ttl");
 }
 
 function input_savestatenrld(){

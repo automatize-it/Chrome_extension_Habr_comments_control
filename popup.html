@@ -23,6 +23,11 @@ div.menustring {
 	position: relative;
 }
 
+div.sbmnstr:before {
+	
+	content: "|\00a0\00a0\00a0";
+}
+
 input.hcc_input{
 	border: 1px solid #d5dddf;
     color: #333;
@@ -46,6 +51,10 @@ input.hcc_input:focus {
 	opacity: 0.4;
 }
 
+#ppp_mn_1 {
+	font-weight: bold;
+}
+
 </style>
 </head>
 
@@ -55,61 +64,61 @@ input.hcc_input:focus {
 
 
 <div style="display: block;">
-	<div class="menustring"><b>ВКЛЮЧИТЬ</b> </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="glblswtchid" type="checkbox"><label for="glblswtchid" class="form-checkbox__fake"></label></div>
+	<div class="menustring" id="ppp_mn_1"></div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="glblswtchid" type="checkbox"><label for="glblswtchid" class="form-checkbox__fake"></label></div>
 </div>
 <hr class="btwncmnts" style="height: 3px;">
 
 <div class="swtchmenu" id="swmn">
-<div style="display: block;" title="Отображать комментарии в хронологическом (оригинал) или случайном порядке">
-	<div class="menustring">Случайный порядок</div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_rndmsrt" type="checkbox"><label for="hcc_rndmsrt" class="form-checkbox__fake"></label></div>
+<div style="display: block;" id="ppp_mn_2_ttl" title="Отображать комментарии в хронологическом (оригинал) или случайном порядке">
+	<div class="menustring" id="ppp_mn_2">Случайный порядок</div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_rndmsrt" type="checkbox"><label for="hcc_rndmsrt" class="form-checkbox__fake"></label></div>
 </div>
 <hr class="btwncmnts">
 
-<div style="display: block;" title="Свернуть треды. Только для корневых комментариев">
-	<div class="menustring">Свернуть ветви </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs" type="checkbox"><label for="hcc_cllpsbrnchs" class="form-checkbox__fake"></label></div>
+<div style="display: block;" id="ppp_mn_3_ttl" title="Свернуть треды. Только для корневых комментариев">
+	<div class="menustring" id="ppp_mn_3">Свернуть ветви </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs" type="checkbox"><label for="hcc_cllpsbrnchs" class="form-checkbox__fake"></label></div>
 </div>
 <div id="brnchssubmn">
-<div style="display: block;" title="Свернуть все ветви">
-	<div class="menustring" style="">&nbsp;&nbsp;&nbsp;и дочерние </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs_all" type="checkbox"><label for="hcc_cllpsbrnchs_all" class="form-checkbox__fake"></label></div>
+<div style="display: block;" id="ppp_mn_3_1_ttl"  title="Свернуть все ветви">
+	<div class="menustring sbmnstr" id="ppp_mn_3_1" style="">и дочерние </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs_all" type="checkbox"><label for="hcc_cllpsbrnchs_all" class="form-checkbox__fake"></label></div>
 </div>
-<div style="display: block;" title="Показывать все ветви изначально развернутыми">
-	<div class="menustring" style="">&nbsp;&nbsp;&nbsp;развернуть по умолчанию </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs_rev" type="checkbox"><label for="hcc_cllpsbrnchs_rev" class="form-checkbox__fake"></label></div>
+<div style="display: block;" id="ppp_mn_3_2_ttl"  title="Показывать все ветви изначально развернутыми">
+	<div class="menustring sbmnstr" id="ppp_mn_3_2" style="">развернуть по умолчанию </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs_rev" type="checkbox"><label for="hcc_cllpsbrnchs_rev" class="form-checkbox__fake"></label></div>
 </div>
-</div>
-
-<hr class="btwncmnts">
-<div style="display: block;" title="Отображать визуальный разделитель. Только между корневыми комментариями">
-	<div class="menustring">Разделитель </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_enbldvdr" type="checkbox"><label for="hcc_enbldvdr" class="form-checkbox__fake"></label></div>
 </div>
 
 <hr class="btwncmnts">
+<div style="display: block;" id="ppp_mn_4_ttl" title="Отображать визуальный разделитель. Только между корневыми комментариями">
+	<div class="menustring" id="ppp_mn_4" >Разделитель </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_enbldvdr" type="checkbox"><label for="hcc_enbldvdr" class="form-checkbox__fake"></label></div>
+</div>
+
+<hr class="btwncmnts">
 
 
-<div style="display: block;" title="Не показывать оценки, в т.ч. у статей">
-	<div class="menustring">Скрыть оценки </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_hiderate" type="checkbox"><label for="hcc_hiderate" class="form-checkbox__fake"></label></div>
+<div style="display: block;" id="ppp_mn_5_ttl" title="Не показывать оценки, в т.ч. у статей">
+	<div class="menustring" id="ppp_mn_5">Скрыть оценки </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_hiderate" type="checkbox"><label for="hcc_hiderate" class="form-checkbox__fake"></label></div>
 </div>
 <div id="votessubmn">
-<div style="display: block;" title="Показать оценку после вашего голоса">
-	<div class="menustring" style="">&nbsp;&nbsp;&nbsp;до голосования </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_hiderate_u" type="checkbox"><label for="hcc_hiderate_u" class="form-checkbox__fake"></label></div>
+<div style="display: block;" id="ppp_mn_5_1_ttl" title="Показать оценку после вашего голоса">
+	<div class="menustring sbmnstr" id="ppp_mn_5_1" style="">до голосования </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_hiderate_u" type="checkbox"><label for="hcc_hiderate_u" class="form-checkbox__fake"></label></div>
 </div>
 </div>
 <hr class="btwncmnts">
-<div style="display: block;" title="Не затенять комментарии с рейтингом ниже нуля">
-	<div class="menustring">Отключить затенение </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_hideshdwng" type="checkbox"><label for="hcc_hideshdwng" class="form-checkbox__fake"></label></div>
+<div style="display: block;" id="ppp_mn_6_ttl" title="Не затенять комментарии с рейтингом ниже нуля">
+	<div class="menustring" id="ppp_mn_6">Отключить затенение </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_hideshdwng" type="checkbox"><label for="hcc_hideshdwng" class="form-checkbox__fake"></label></div>
 </div>
 
 <hr class="btwncmnts">
-<div style="display: block;" title="Частично скрыть комментарии с количеством символов (только текст) свыше указанного. Только корневые комментарии. Можно развернуть впоследствии. Enter для сохранения">
-	<div class="menustring">Полускрыть > <input id="hcc_hidelng_lngth" class="hcc_input" type="text" value="" size="2"> симв. </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_hidelng" type="checkbox"><label for="hcc_hidelng" class="form-checkbox__fake"></label></div>
+<div style="display: block;" id="ppp_mn_7_ttl" title="Частично скрыть комментарии с количеством символов (только текст) свыше указанного. Только корневые комментарии. Можно развернуть впоследствии. Enter для сохранения">
+	<div class="menustring" id="ppp_mn_7" > <input id="hcc_hidelng_lngth" class="hcc_input" type="text" value="" size="2"> </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_hidelng" type="checkbox"><label for="hcc_hidelng" class="form-checkbox__fake"></label></div>
 </div>
 <hr class="btwncmnts">
-<div style="display: block;" title="Переместить комментарии с количеством символов короче указанного в низ списка. Enter для сохранения">
-	<div class="menustring">Короткие < <input id="hcc_shrt2bttm_lngth" type="text" class="hcc_input" value="" size="2"> симв. вниз </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_shrt2bttm" type="checkbox"><label for="hcc_shrt2bttm" class="form-checkbox__fake"></label></div>
+<div style="display: block;" id="ppp_mn_8_ttl" title="Переместить комментарии с количеством символов короче указанного в низ списка. Enter для сохранения">
+	<div class="menustring" id="ppp_mn_8"> <input id="hcc_shrt2bttm_lngth" type="text" class="hcc_input" value="" size="2"> </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_shrt2bttm" type="checkbox"><label for="hcc_shrt2bttm" class="form-checkbox__fake"></label></div>
 </div>
 
 <hr class="btwncmnts">
-<div style="display: block;" title="Показать рядом с ником пользователя заметку, если есть">
-	<div class="menustring">Заметки о пользователях </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_shwusrnt" type="checkbox"><label for="hcc_shwusrnt" class="form-checkbox__fake"></label></div>
+<div style="display: block;" id="ppp_mn_9_ttl" title="Показать рядом с ником пользователя заметку, если есть">
+	<div class="menustring" id="ppp_mn_9">Заметки о пользователях </div><div style="display: inline-block;" class="form-checkbox" value="true"><input class="form-checkbox__real" id="hcc_shwusrnt" type="checkbox"><label for="hcc_shwusrnt" class="form-checkbox__fake"></label></div>
 </div>
 </div>
 <script src="popup.js"></script>

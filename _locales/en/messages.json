@@ -1,0 +1,98 @@
+{
+  "ppp_mn_1": {
+    "message": "ENABLE",
+    "description": "empty"
+  },
+  "ppp_mn_2": {
+    "message": "Random sort",
+    "description": "empty"
+  },
+  "ppp_mn_2_ttl": {
+    "message": "Sort comments randomly, instead of chronological order. Only root comments affected",
+    "description": "empty"
+  },
+  "ppp_mn_3": {
+    "message": "Collapse branches",
+    "description": "empty"
+  },
+  "ppp_mn_3_ttl": {
+    "message": "Collapse threads. Only root comments affected",
+    "description": "empty"
+  },
+  "ppp_mn_3_1": {
+    "message": "collapse child branches",
+    "description": "empty"
+  },
+  "ppp_mn_3_1_ttl": {
+    "message": "Collapse all threads",
+    "description": "empty"
+  },
+  "ppp_mn_3_2": {
+    "message": "expand by default",
+    "description": "empty"
+  },
+  "ppp_mn_3_2_ttl": {
+    "message": "Show threads expanded by default",
+    "description": "empty"
+  },
+  "ppp_mn_4": {
+    "message": "Visual divider",
+    "description": "empty"
+  },
+  "ppp_mn_4_ttl": {
+    "message": "Show thin gray line between comment. Only for root comments",
+    "description": "empty"
+  },
+  "ppp_mn_5": {
+    "message": "Hide rates",
+    "description": "empty"
+  },
+  "ppp_mn_5_ttl": {
+    "message": "Hide comments and articles rates",
+    "description": "empty"
+  },
+  "ppp_mn_5_1": {
+    "message": "until my vote",
+    "description": "empty"
+  },
+  "ppp_mn_5_1_ttl": {
+    "message": "Show rate after I voted. For voted items only",
+    "description": "empty"
+  },
+  "ppp_mn_6": {
+    "message": "Disable shadowing",
+    "description": "empty"
+  },
+  "ppp_mn_6_ttl": {
+    "message": "Do not make downrated comments transparent",
+    "description": "empty"
+  },
+  "ppp_mn_7": {
+    "message": "Part-hide >",
+    "description": "empty"
+  },
+  "ppp_mn_7_ttl": {
+    "message": "Show only beginning of comments longer than X symbols. Enter to save",
+    "description": "empty"
+  },
+  "ppp_mn_8": {
+    "message": "To bottom short <",
+    "description": "empty"
+  },
+  "ppp_mn_8_ttl": {
+    "message": "Move comments shorter than X symbols to bottom. Enter to save",
+    "description": "empty"
+  },
+  "ppp_mn_9": {
+    "message": "Users notes",
+    "description": "empty"
+  },
+  "ppp_mn_9_ttl": {
+    "message": "Show notes about users if available. Note will appear near userpic",
+    "description": "empty"
+  },
+  "symb": {
+    "message": "symb.",
+    "description": "empty"
+  }
+}

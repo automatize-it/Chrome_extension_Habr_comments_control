@@ -1,0 +1,98 @@
+{
+  "ppp_mn_1": {
+    "message": "ВКЛЮЧИТЬ",
+    "description": "empty"
+  },
+  "ppp_mn_2": {
+    "message": "Случайный порядок",
+    "description": "empty"
+  },
+  "ppp_mn_2_ttl": {
+    "message": "Отображать комментарии в хронологическом (оригинал) или случайном порядке. Только для корневых комментариев",
+    "description": "empty"
+  },
+  "ppp_mn_3": {
+    "message": "Свернуть ветви",
+    "description": "empty"
+  },
+  "ppp_mn_3_ttl": {
+    "message": "Свернуть треды. Только для корневых комментариев",
+    "description": "empty"
+  },
+  "ppp_mn_3_1": {
+    "message": "и дочерние",
+    "description": "empty"
+  },
+  "ppp_mn_3_1_ttl": {
+    "message": "Свернуть все ветви",
+    "description": "empty"
+  },
+  "ppp_mn_3_2": {
+    "message": "развернуть по умолчанию",
+    "description": "empty"
+  },
+  "ppp_mn_3_2_ttl": {
+    "message": "Показывать все ветви изначально развернутыми",
+    "description": "empty"
+  },
+  "ppp_mn_4": {
+    "message": "Разделитель",
+    "description": "empty"
+  },
+  "ppp_mn_4_ttl": {
+    "message": "Отображать визуальный разделитель. Только между корневыми комментариями",
+    "description": "empty"
+  },
+  "ppp_mn_5": {
+    "message": "Скрыть оценки",
+    "description": "empty"
+  },
+  "ppp_mn_5_ttl": {
+    "message": "Не показывать оценки, в т.ч. у статей",
+    "description": "empty"
+  },
+  "ppp_mn_5_1": {
+    "message": "до голосования",
+    "description": "empty"
+  },
+  "ppp_mn_5_1_ttl": {
+    "message": "Показать оценку после вашего голоса",
+    "description": "empty"
+  },
+  "ppp_mn_6": {
+    "message": "Отключить затенение",
+    "description": "empty"
+  },
+  "ppp_mn_6_ttl": {
+    "message": "Не затенять комментарии с рейтингом ниже нуля",
+    "description": "empty"
+  },
+  "ppp_mn_7": {
+    "message": "Полускрыть >",
+    "description": "empty"
+  },
+  "ppp_mn_7_ttl": {
+    "message": "Частично скрыть комментарии с количеством символов (только текст) свыше указанного. Только корневые комментарии. Можно развернуть впоследствии. Enter для сохранения",
+    "description": "empty"
+  },
+  "ppp_mn_8": {
+    "message": "Вниз короткие <",
+    "description": "empty"
+  },
+  "ppp_mn_8_ttl": {
+    "message": "Переместить комментарии с количеством символов короче указанного в низ списка. Enter для сохранения",
+    "description": "empty"
+  },
+  "ppp_mn_9": {
+    "message": "Заметки о пользователях",
+    "description": "empty"
+  },
+  "ppp_mn_9_ttl": {
+    "message": "Показать рядом с ником пользователя заметку, если есть",
+    "description": "empty"
+  },
+  "symb": {
+    "message": "симв.",
+    "description": "empty"
+  }
+}

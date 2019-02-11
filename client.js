@@ -1,5 +1,8 @@
 ﻿var sttngsarr = {'hcc_rndmsrt': '0', 'hcc_cllpsbrnchs': '0', 'hcc_cllpsbrnchs_all':'0', 'hcc_cllpsbrnchs_rev':'0', 'hcc_enbldvdr': '0', 'hcc_hiderate': '0', 'hcc_hiderate_u':'0', 'hcc_hideshdwng': '0', 'hcc_shwusrnt': '0', 'hcc_hidelng': '0', 'hcc_shrt2bttm': '0', 'hcc_hidelng_lngth': '420', 'hcc_shrt2bttm_lngth': '50'};
 
+var scrltoparr = [];
+var unrdcmmnts;
+
 String.prototype.trim = function () {
     return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
 };
@@ -48,7 +51,18 @@ function hcc_start(){
 
  
 function applyformat(){
+	
+	var unrd; 
+	unrd = document.querySelector("#xpanel");
+	if (unrd){
 		
+		unrd = unrd.querySelector("span.new");
+		if (unrd.style.display != "none"){
+			
+			unrdcmmnts = document.querySelectorAll("li.js-comment_new");
+		}
+	}	
+	
 	var rootcmnts = document.getElementById('comments-list').children;
 	
 	if (sttngsarr.hcc_hiderate == '1'){ 
@@ -228,6 +242,8 @@ function applyformat(){
 		
 		getntsdata();
 	}
+	
+	document.getElementById("xpanel").addEventListener("click", fixtracker, false);
 		
 }
 
@@ -283,12 +299,39 @@ function addusrnts(dcmnt){
 		}
 	}
 			
-} 
+}
 
-//window.addEventListener('DOMContentLoaded', hcc_start());
+function fixtracker(){
+	
+	console.log("mlv");
+	if (!unrdcmmnts || sttngsarr.hcc_cllpsbrnchs == '0') return;
+	for (let i=0; i< unrdcmmnts.length; i++){
+				
+		let tmpinpt = unrdcmmnts[i].parentNode;
+		tmpinpt = tmpinpt.querySelectorAll("input.brtggl");
+		for (let z=0; z < tmpinpt.length; z++){
+			
+			tmpinpt[z].checked = true;
+		}
+		
+		let tmp = unrdcmmnts[i];
+		while (tmp.parentNode){
+				
+			tmp = tmp.parentNode;
+			if (tmp.tagName == "LI"){
+				
+				let tmp2 = tmp.querySelector("input.brtggl");
+				if (tmp2) tmp2.checked = true;
+			}
+			if (tmp.id == "comments-list") break;
+		}
+	}
+}
+
+//window.addEventListener('DOMContentLoaded', addlst());
 window.addEventListener('load', hcc_start());
 
-document.getElementById("comments").addEventListener("click", function(event){
+document.getElementById("comments").addEventListener('click', function(event){
 	
 	
 	if (event == null || sttngsarr.hcc_hiderate_u == '0') return;
@@ -317,3 +360,5 @@ document.getElementById("comments").addEventListener("click", function(event){
 		i++;
 	}
 });
+
+document.getElementById("xpanel").addEventListener("click", fixtracker, false);

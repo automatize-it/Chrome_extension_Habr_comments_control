@@ -91,6 +91,14 @@
     "message": "Show notes about users if available. Note will appear near userpic",
     "description": "empty"
   },
+  "ppp_mn_10": {
+    "message": "Hide users ratings",
+    "description": "empty"
+  },
+  "ppp_mn_10_ttl": {
+    "message": "Do not show users ratings (karma etc), including on user pages",
+    "description": "empty"
+  },
   "symb": {
     "message": "symb.",
     "description": "empty"

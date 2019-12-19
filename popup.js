@@ -54,6 +54,21 @@ function popuphndlr(){
 					}
 				}
 				
+				/******* LATER
+				
+				if (key == "hcc_hidertngs"){
+					
+					if (popupstngsarr[key] == '1') {
+						document.getElementById("rtngssubmn").style.opacity = "1";
+					}
+					else {
+						document.getElementById("rtngssubmn").style.opacity = "0.4";
+						document.getElementById("hcc_hidertngs_u").disabled = true;
+						document.getElementById("hcc_hidertngs_v").disabled = true;
+					}
+				}
+				*/
+				
 				if (tmp.className == "hcc_input"){
 					
 					tmp.value = popupstngsarr[key];
@@ -118,6 +133,9 @@ function localize_menu(){
 	
 	document.getElementById('ppp_mn_9').innerText = chrome.i18n.getMessage("ppp_mn_9");
 	document.getElementById('ppp_mn_9_ttl').title = chrome.i18n.getMessage("ppp_mn_9_ttl");
+	
+	document.getElementById('ppp_mn_10').innerText = chrome.i18n.getMessage("ppp_mn_10");
+	document.getElementById('ppp_mn_10_ttl').title = chrome.i18n.getMessage("ppp_mn_10_ttl");
 }
 
 function input_savestatenrld(){

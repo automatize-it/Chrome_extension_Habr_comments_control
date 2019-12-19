@@ -1,4 +1,4 @@
-﻿var sttngsarr = {'hcc_rndmsrt': '0', 'hcc_cllpsbrnchs': '0', 'hcc_cllpsbrnchs_all':'0', 'hcc_cllpsbrnchs_rev':'0', 'hcc_enbldvdr': '0', 'hcc_hiderate': '0', 'hcc_hiderate_u':'0', 'hcc_hideshdwng': '0', 'hcc_shwusrnt': '0', 'hcc_hidelng': '0', 'hcc_shrt2bttm': '0', 'hcc_hidelng_lngth': '420', 'hcc_shrt2bttm_lngth': '50'};
+﻿var sttngsarr = {'hcc_rndmsrt': '0', 'hcc_cllpsbrnchs': '0', 'hcc_cllpsbrnchs_all':'0', 'hcc_cllpsbrnchs_rev':'0', 'hcc_enbldvdr': '0', 'hcc_hiderate': '0', 'hcc_hiderate_u':'0', 'hcc_hideshdwng': '0', 'hcc_shwusrnt': '0', 'hcc_hidelng': '0', 'hcc_shrt2bttm': '0', 'hcc_hidelng_lngth': '420', 'hcc_shrt2bttm_lngth': '50', 'hcc_hidertngs': '0'};
 
 var scrltoparr = [];
 var unrdcmmnts;
@@ -63,11 +63,13 @@ function applyformat(){
 		}
 	}	
 	
+	if (sttngsarr.hcc_hidertngs == '1') { addcss('.stacked-counter {visibility: hidden; display: none;}');}
+	
 	var rootcmnts = document.getElementById('comments-list').children;
 	
 	if (sttngsarr.hcc_hiderate == '1'){ 
 		
-		addcss('span.voting-wjt__counter {visibility: hidden; display: none;');
+		addcss('span.voting-wjt__counter {visibility: hidden; display: none;}');
 	
 		//unhide if voted
 		if (sttngsarr.hcc_hiderate_u == '1'){ 
@@ -222,7 +224,6 @@ function applyformat(){
 			
 		}
 	}
-	//https://habr.com/ru/company/fbk/blog/347312/#comment_10635686
 	
 	if (sttngsarr.hcc_enbldvdr == '1') {
 		

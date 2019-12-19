@@ -91,6 +91,14 @@
     "message": "Показать рядом с ником пользователя заметку, если есть",
     "description": "empty"
   },
+  "ppp_mn_10": {
+    "message": "Скрыть рейтинги",
+    "description": "empty"
+  },
+  "ppp_mn_10_ttl": {
+    "message": "Отключить отображение информации о рейтингах пользователей сайта, в том числе на страницах профилей",
+    "description": "empty"
+  },
   "symb": {
     "message": "симв.",
     "description": "empty"

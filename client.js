@@ -24,6 +24,11 @@ function addcss(css){
     head.appendChild(s);
 }
 
+function addcss_hide(tag){
+	
+	addcss(tag+'{visibility: hidden; display: none;}');
+}
+
 function hcc_start(){
 	
 	chrome.storage.local.get('hcc_glblswtch', function (result) {
@@ -66,20 +71,24 @@ function applyformat(){
 	
 	if (sttngsarr.hcc_hideorigbrn == '1') { 
 		
-		addcss('span.comment__collapse {visibility: hidden; display: none;}');
+		//addcss('span.comment__collapse {visibility: hidden; display: none;}');
+		addcss_hide('span.comment__collapse');
 	}
 	
 	if (sttngsarr.hcc_hidertngs == '1') { 
 		
-		addcss('.stacked-counter {visibility: hidden; display: none;}');
-		addcss('.dropdown__user-stats {visibility: hidden; display: none;}');
+		//addcss('.stacked-counter {visibility: hidden; display: none;}');
+		//addcss('.dropdown__user-stats {visibility: hidden; display: none;}');
+		addcss_hide('.stacked-counter');
+		addcss_hide('.dropdown__user-stats');
 	}
 	
 	var rootcmnts = document.getElementById('comments-list').children;
 	
 	if (sttngsarr.hcc_hiderate == '1'){ 
 		
-		addcss('span.voting-wjt__counter {visibility: hidden; display: none;}');
+		//addcss('span.voting-wjt__counter {visibility: hidden; display: none;}');
+		addcss_hide('span.voting-wjt__counter');
 	
 		//unhide if voted
 		if (sttngsarr.hcc_hiderate_u == '1'){ 
@@ -103,8 +112,9 @@ function applyformat(){
 	
 	if (sttngsarr.hcc_hidelng == '1') { 
 		
-		addcss('.brtggl {visibility: hidden; display: none;}'); 
-				
+		//addcss('.brtggl {visibility: hidden; display: none;}'); 
+		addcss_hide('span.voting-wjt__counter');
+		
 		addcss('label.cmmtggl {display: block; color: #666;}');
 		
 		addcss('div.lngcmmnt { width: 100%; max-height: 8em; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0)); -webkit-mask-size: 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: 100% 50%;}'); 
@@ -114,11 +124,13 @@ function applyformat(){
 					
 	if (sttngsarr.hcc_cllpsbrnchs == '1'){  
 				
-		addcss('.brtggl {visibility: hidden; display: none;}'); 
+		//addcss('.brtggl {visibility: hidden; display: none;}'); 
+		addcss_hide('.brtggl');
 				
 		addcss('label.cmmtggl {display: block; color: #666;}');
 		
 		if (sttngsarr.hcc_cllpsbrnchs_rev == '0'){
+			
 			addcss('label.cmmtggl::before {font-weight: normal; font-size: 16px; content: "\\1f4ac h"; vertical-align: middle; display: inline-block; width: 2em; background: #f7f7f7; text-align: center;}');
 			addcss('.brtggl:checked ~ label.cmmtggl::before { content: "–";}');
 		} else {
@@ -152,15 +164,17 @@ function applyformat(){
 				
 				if (sttngsarr.hcc_cllpsbrnchs_rev == '0'){  
 					
-					addcss('#'+tmpid+' {visibility: hidden; display: none;}');
+					//addcss('#'+tmpid+' {visibility: hidden; display: none;}');
+					addcss_hide('#'+tmpid);
 					addcss('#tggl_'+tmpid+':checked ~ #'+tmpid+'{visibility: visible; display: block;}');
+					//tmpipt.checked = true;
 				}
 				else {
 					
 					addcss('#'+tmpid+' {visibility: visible; display: block;}');
 					addcss('#tggl_'+tmpid+':checked ~ #'+tmpid+'{visibility: hidden; display: none;}');
+					//tmpipt.checked = false;
 				}
-				
 				
 				let tmpamnt = brnch.querySelectorAll('li.content-list__item_comment').length;
 				
@@ -217,24 +231,7 @@ function applyformat(){
 			}
 		}
 	}
-		
-	//expand branch if url is for direct comment 
-	if (sttngsarr.hcc_cllpsbrnchs == '1' && (window.location.href).includes("#comment_") ){
-		
-		let cmnt = window.location.href;
-		cmnt = cmnt.substring(cmnt.indexOf("#"),cmnt.Length);
-		let tmp = document.querySelector(cmnt);
-		
-		while (tmp.parentNode){
-			
-			tmp = tmp.parentNode;
-			if (tmp.className == "comments-list") break;
-			let tmpinpt = tmp.querySelector('input[class=brtggl]');
-			if (tmpinpt) tmpinpt.checked = true;
-			
-		}
-	}
-	
+
 	if (sttngsarr.hcc_enbldvdr == '1') {
 		
 		var hr = document.createElement("hr");
@@ -255,6 +252,30 @@ function applyformat(){
 	}
 	
 	document.getElementById("xpanel").addEventListener("click", fixtracker, false);
+	
+	//expand branch if url is for direct comment sttngsarr.hcc_cllpsbrnchs == '1' &&
+
+	if ( sttngsarr.hcc_cllpsbrnchs == '1' && sttngsarr.hcc_cllpsbrnchs_rev == '0' && (window.location.href).includes("#comment_") ){
+		
+		//console.log(sttngsarr.hcc_cllpsbrnchs);
+		let cmnt = window.location.href;
+		cmnt = cmnt.substring(cmnt.indexOf("#"),cmnt.Length);
+		let tmp = document.querySelector(cmnt);
+		
+		while (tmp.parentNode){
+			
+			tmp = tmp.parentNode;
+			if (tmp.className == "comments-list") break;
+			let tmpinpt = tmp.querySelector('input[class=brtggl]');
+			if (tmpinpt) {
+				
+				tmpinpt.checked = true;
+			}
+			
+		}
+		
+		document.getElementById(cmnt).focus(); 
+	}
 		
 }
 

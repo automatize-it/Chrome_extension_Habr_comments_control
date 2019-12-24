@@ -99,6 +99,14 @@
     "message": "Do not show users ratings (karma etc), including on user pages",
     "description": "empty"
   },
+  "ppp_mn_11": {
+    "message": "Hide native branch collapsing",
+    "description": "empty"
+  },
+  "ppp_mn_11_ttl": {
+    "message": "Do not show built-in site mechanism to collapse comment branches",
+    "description": "empty"
+  },
   "symb": {
     "message": "symb.",
     "description": "empty"

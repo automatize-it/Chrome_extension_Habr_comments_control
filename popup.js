@@ -136,6 +136,9 @@ function localize_menu(){
 	
 	document.getElementById('ppp_mn_10').innerText = chrome.i18n.getMessage("ppp_mn_10");
 	document.getElementById('ppp_mn_10_ttl').title = chrome.i18n.getMessage("ppp_mn_10_ttl");
+	
+	document.getElementById('ppp_mn_11').innerText = chrome.i18n.getMessage("ppp_mn_11");
+	document.getElementById('ppp_mn_11_ttl').title = chrome.i18n.getMessage("ppp_mn_11_ttl");
 }
 
 function input_savestatenrld(){

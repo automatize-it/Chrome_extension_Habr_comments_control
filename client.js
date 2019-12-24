@@ -1,4 +1,4 @@
-﻿var sttngsarr = {'hcc_rndmsrt': '0', 'hcc_cllpsbrnchs': '0', 'hcc_cllpsbrnchs_all':'0', 'hcc_cllpsbrnchs_rev':'0', 'hcc_enbldvdr': '0', 'hcc_hiderate': '0', 'hcc_hiderate_u':'0', 'hcc_hideshdwng': '0', 'hcc_shwusrnt': '0', 'hcc_hidelng': '0', 'hcc_shrt2bttm': '0', 'hcc_hidelng_lngth': '420', 'hcc_shrt2bttm_lngth': '50', 'hcc_hidertngs': '0'};
+﻿var sttngsarr = {'hcc_rndmsrt': '0', 'hcc_cllpsbrnchs': '0', 'hcc_cllpsbrnchs_all':'0', 'hcc_cllpsbrnchs_rev':'0', 'hcc_enbldvdr': '0', 'hcc_hiderate': '0', 'hcc_hiderate_u':'0', 'hcc_hideshdwng': '0', 'hcc_shwusrnt': '0', 'hcc_hidelng': '0', 'hcc_shrt2bttm': '0', 'hcc_hidelng_lngth': '420', 'hcc_shrt2bttm_lngth': '50', 'hcc_hidertngs': '0', 'hcc_hideorigbrn': '0'};
 
 var scrltoparr = [];
 var unrdcmmnts;
@@ -53,6 +53,7 @@ function hcc_start(){
 function applyformat(){
 	
 	var unrd; 
+	
 	unrd = document.querySelector("#xpanel");
 	if (unrd){
 		
@@ -61,9 +62,18 @@ function applyformat(){
 			
 			unrdcmmnts = document.querySelectorAll("li.js-comment_new");
 		}
-	}	
+	}
 	
-	if (sttngsarr.hcc_hidertngs == '1') { addcss('.stacked-counter {visibility: hidden; display: none;}');}
+	if (sttngsarr.hcc_hideorigbrn == '1') { 
+		
+		addcss('span.comment__collapse {visibility: hidden; display: none;}');
+	}
+	
+	if (sttngsarr.hcc_hidertngs == '1') { 
+		
+		addcss('.stacked-counter {visibility: hidden; display: none;}');
+		addcss('.dropdown__user-stats {visibility: hidden; display: none;}');
+	}
 	
 	var rootcmnts = document.getElementById('comments-list').children;
 	

@@ -113,7 +113,7 @@ function applyformat(){
 	if (sttngsarr.hcc_hidelng == '1') { 
 		
 		//addcss('.brtggl {visibility: hidden; display: none;}'); 
-		addcss_hide('span.voting-wjt__counter');
+		//addcss_hide('span.voting-wjt__counter');
 		
 		addcss('label.cmmtggl {display: block; color: #666;}');
 		

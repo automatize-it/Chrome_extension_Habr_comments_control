@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Habr comments control",
-	"version": "0.5.5",
+	"version": "0.6.1",
 	"description": "Настройки отображения информации на habr.com: свернуть ветви комментариев и пр. Add-on provides visual options for habr.com.",
 	"default_locale": "ru",
  	"icons": {
@@ -11,7 +11,6 @@
 		"256": "hcc_256.png"
 	},
 	"permissions": [
-		"tabs",
 		"https://habr.com/post/*",
 		"https://habr.com/company/*",
 		"https://habr.com/article/*",
@@ -29,7 +28,6 @@
 	},
 	"content_scripts": [
 		{
-		  "all_frames": true,
 		  "matches": [ "https://habr.com/post/*", "https://habr.com/company/*", "https://habr.com/article/*", "https://habr.com/*/post/*", "https://habr.com/*/company/*", "https://habr.com/*/article/*", "https://habr.com/*/news/*", "https://habr.com/*/users/*" ],
 		  "js": [ "client.js" ],
 		  "run_at": "document_end"

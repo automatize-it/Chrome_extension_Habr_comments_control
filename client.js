@@ -71,14 +71,11 @@ function applyformat(){
 	
 	if (sttngsarr.hcc_hideorigbrn == '1') { 
 		
-		//addcss('span.comment__collapse {visibility: hidden; display: none;}');
 		addcss_hide('span.comment__collapse');
 	}
 	
 	if (sttngsarr.hcc_hidertngs == '1') { 
 		
-		//addcss('.stacked-counter {visibility: hidden; display: none;}');
-		//addcss('.dropdown__user-stats {visibility: hidden; display: none;}');
 		addcss_hide('.stacked-counter');
 		addcss_hide('.dropdown__user-stats');
 	}
@@ -87,13 +84,14 @@ function applyformat(){
 	
 	if (sttngsarr.hcc_hiderate == '1'){ 
 		
-		//addcss('span.voting-wjt__counter {visibility: hidden; display: none;}');
 		addcss_hide('span.voting-wjt__counter');
 	
 		//unhide if voted
+		//in half cases unhides current first comment's rate instead of voted, but only "live", after page reload works correctly
 		if (sttngsarr.hcc_hiderate_u == '1'){ 
 			
 			let tmp = document.querySelectorAll("div.voting-wjt_comments");
+			
 			for (let item of tmp){
 				
 				if (item.querySelector("button.voting-wjt__button").title.includes("Вы")){
@@ -109,24 +107,10 @@ function applyformat(){
 	if (sttngsarr.hcc_hideshdwng == '1'){ addcss('.comment__message_downgrade {opacity: 1 !important;}');}
 	
 	if (sttngsarr.hcc_enbldvdr == '1') {addcss('hr.btwncmnts {display: block;  margin-top: 2em;  margin-bottom: 2em; width: 90%; height: 1px; border: none; color:#e3e3e3;background-color:#e3e3e3;}');}
-	
-	if (sttngsarr.hcc_hidelng == '1') { 
-		
-		//addcss('.brtggl {visibility: hidden; display: none;}'); 
-		//addcss_hide('span.voting-wjt__counter');
-		
-		addcss('label.cmmtggl {display: block; color: #666;}');
-		
-		addcss('div.lngcmmnt { width: 100%; max-height: 8em; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0)); -webkit-mask-size: 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: 100% 50%;}'); 
-		
-		addcss('label.lngcmmtggl {vertical-align: middle; font-style: italic; display: block; text-align: center; width: 100%; color: #bbb; }');
-	}
 					
 	if (sttngsarr.hcc_cllpsbrnchs == '1'){  
 				
-		//addcss('.brtggl {visibility: hidden; display: none;}'); 
 		addcss_hide('.brtggl');
-				
 		addcss('label.cmmtggl {display: block; color: #666;}');
 		
 		if (sttngsarr.hcc_cllpsbrnchs_rev == '0'){
@@ -164,16 +148,13 @@ function applyformat(){
 				
 				if (sttngsarr.hcc_cllpsbrnchs_rev == '0'){  
 					
-					//addcss('#'+tmpid+' {visibility: hidden; display: none;}');
 					addcss_hide('#'+tmpid);
 					addcss('#tggl_'+tmpid+':checked ~ #'+tmpid+'{visibility: visible; display: block;}');
-					//tmpipt.checked = true;
 				}
 				else {
 					
 					addcss('#'+tmpid+' {visibility: visible; display: block;}');
 					addcss('#tggl_'+tmpid+':checked ~ #'+tmpid+'{visibility: hidden; display: none;}');
-					//tmpipt.checked = false;
 				}
 				
 				let tmpamnt = brnch.querySelectorAll('li.content-list__item_comment').length;
@@ -185,6 +166,12 @@ function applyformat(){
 	}
 				
 	if (sttngsarr.hcc_hidelng == '1'){ 
+		
+		addcss('label.cmmtggl {display: block; color: #666;}');
+		
+		addcss('div.lngcmmnt { width: 100%; max-height: 8em; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0)); -webkit-mask-size: 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: 100% 50%;}'); 
+		
+		addcss('label.lngcmmtggl {vertical-align: middle; font-style: italic; display: block; text-align: center; width: 100%; color: #bbb; }');
 		
 		for (let i=0; i < rootcmnts.length; i++){
 
@@ -231,6 +218,79 @@ function applyformat(){
 			}
 		}
 	}
+	
+	
+	/**********************EXPERIMENTAL*************************/
+	/*
+	var enblexprmnlt = 0;
+	
+	if (enblexprmnlt == 1){
+		
+		var tcmntsnms = [];
+		var tcmntsrts = [];
+		
+		let z = -1;
+		let tmpamnt = "";
+		for (let i=0; i < rootcmnts.length; i++ ){
+			
+			let ttls = rootcmnts[i].querySelector('span.voting-wjt__counter');
+			
+			//Всего голосов –8: ↑7 и ↓15
+			
+			tmpamnt = (ttls.innerText);
+			if (tmpamnt == "") {continue;}
+			
+			if (tmpamnt.indexOf("–") != -1) {
+				
+				tmpamnt = tmpamnt.replace(/–/g,"-");
+			}
+			
+			tmpamnt = parseInt(tmpamnt);
+			let tmpstr = ttls.title;
+			
+			let plss = parseInt(tmpstr.substring((tmpstr.indexOf("↑")+1),(tmpstr.indexOf("↓")-3)));
+			let mnss = parseInt(tmpstr.substring((tmpstr.indexOf("↓")+1),tmpstr.Length));
+			
+			if (plss == 0 || mnss == 0 || (plss+mnss) < 8) {continue;}
+			
+			z++;
+			
+			//this is index of root comment. It's not working, dunno why
+			tcmntsnms[z] = i;
+			//We need max rating and mix plus-to-minus amount to count comment as interesting.
+			//So we need max amount of votes minus min plus-to-minus to be highest to count comment discussable
+			tcmntsrts[z] = (plss+mnss) - Math.abs(tmpamnt);
+							
+		}
+		
+		console.log(tcmntsnms);
+		console.log(tcmntsrts);
+		console.log("alive_end");
+		
+		let tmpln = z;
+		var endcmnts = [];
+		for (i=0; i < z+1; i++){
+			
+			let mx = Math.max.apply(null, tcmntsrts);
+			let tmpi = tcmntsrts.indexOf(mx);
+			endcmnts[i] = tcmntsnms[tmpi];
+			tcmntsrts[tmpi] = 0;
+		}
+		
+		endcmnts = endcmnts.reverse();
+		console.log(endcmnts);
+		
+		i = 0;
+	
+		while (endcmnts.length > i){
+			
+			//rootdiv.insertBefore(rootcmnts[tmp], rootcmnts[i]);
+			rootdiv.insertBefore(rootcmnts[(endcmnts[i])],rootcmnts[0]);
+			i++;
+		}
+		
+	}
+	*/
 
 	if (sttngsarr.hcc_enbldvdr == '1') {
 		
@@ -250,6 +310,7 @@ function applyformat(){
 		
 		getntsdata();
 	}
+		
 	
 	document.getElementById("xpanel").addEventListener("click", fixtracker, false);
 	
@@ -257,7 +318,6 @@ function applyformat(){
 
 	if ( sttngsarr.hcc_cllpsbrnchs == '1' && sttngsarr.hcc_cllpsbrnchs_rev == '0' && (window.location.href).includes("#comment_") ){
 		
-		//console.log(sttngsarr.hcc_cllpsbrnchs);
 		let cmnt = window.location.href;
 		cmnt = cmnt.substring(cmnt.indexOf("#"),cmnt.Length);
 		let tmp = document.querySelector(cmnt);
@@ -317,7 +377,6 @@ function addusrnts(dcmnt){
 		for (let ii=0; ii<usrnms.length; ii++){
 			if (tmpusrnm == usrnms[ii].innerText.trim()){
 				
-				//console.log("gotcha");
 				let tmpparent = usrsincmmnts[i].parentNode;
 				let tmpref = tmpparent.querySelector("time");
 				let tmphtml = document.createElement("div");
@@ -335,7 +394,6 @@ function addusrnts(dcmnt){
 
 function fixtracker(){
 	
-	console.log("mlv");
 	if (!unrdcmmnts || sttngsarr.hcc_cllpsbrnchs == '0') return;
 	for (let i=0; i< unrdcmmnts.length; i++){
 				

@@ -1,4 +1,4 @@
-{
+﻿{
   "ppp_mn_1": {
     "message": "ENABLE",
     "description": "empty"
@@ -33,6 +33,14 @@
   },
   "ppp_mn_3_2_ttl": {
     "message": "Show threads expanded by default",
+    "description": "empty"
+  },
+  "ppp_mn_3_3": {
+    "message": "(β)Bottom collapse button",
+    "description": "empty"
+  },
+  "ppp_mn_3_3_ttl": {
+    "message": "Enables button in bottom of thread that allow to revesely collapse branch. Beta. Requires \"Collapse all threads\"",
     "description": "empty"
   },
   "ppp_mn_4": {

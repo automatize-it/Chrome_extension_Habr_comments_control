@@ -1,15 +1,21 @@
-﻿var sttngsarr = {'hcc_rndmsrt': '0', 'hcc_cllpsbrnchs': '0', 'hcc_cllpsbrnchs_all':'0', 'hcc_cllpsbrnchs_rev':'0', 'hcc_enbldvdr': '0', 'hcc_hiderate': '0', 'hcc_hiderate_u':'0', 'hcc_hideshdwng': '0', 'hcc_shwusrnt': '0', 'hcc_hidelng': '0', 'hcc_shrt2bttm': '0', 'hcc_hidelng_lngth': '420', 'hcc_shrt2bttm_lngth': '50', 'hcc_hidertngs': '0', 'hcc_hideorigbrn': '0'};
+﻿var sttngsarr = {'hcc_rndmsrt': '0', 'hcc_cllpsbrnchs': '0', 'hcc_cllpsbrnchs_all':'0', 'hcc_cllpsbrnchs_rev':'0','hcc_revcll_bttn':'0', 'hcc_enbldvdr': '0', 'hcc_hiderate': '0', 'hcc_hiderate_u':'0', 'hcc_hideshdwng': '0', 'hcc_shwusrnt': '0', 'hcc_hidelng': '0', 'hcc_shrt2bttm': '0', 'hcc_hidelng_lngth': '420', 'hcc_shrt2bttm_lngth': '50', 'hcc_hidertngs': '0', 'hcc_hideorigbrn': '0'};
 
 var scrltoparr = [];
 var unrdcmmnts;
+
+//tried hard to codegrab Habr's original branch icon but completely failed (((
+//var comtreesvg =" url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAFNSURBVDhPfZLLSsNQEIbTpLnYtA2CWhAFH8rncudLFJcirl2JEEuLt1bUKG0aSZcudGOcL2bCqRADX6Y9Z/5/Zk6OVRRFy6AthMJGFVlzBLuipQJiE6aRxwJKX+gJOGs1k66wJ9jqEgiIIsEVcON3X+hZ8kgkx9EKQK9q0AgvTT7Qxf/ghYChaMU6PBoWED+nnvzHCDpVdBHQG4MhrAXjJMOkTBIQQDk0wxJxrAWTJFN3To49jNsk4kSFTaEWnFzehtfS1nSRe4/pyn+Y5+7N23sHAcnENUETpmCtpQa++Sb1g+B+nm8JodAVImH7NJ7uqkgrMFx5SsfnV8HZaGZ/fH6xXu5J/85fAXeF4euWLu6SoKrqT16zvinAmbOmiingHrHvxk+LyBQwrN79WjBOlpx/ea3lmwxMwY4wIBl0Y5auaBOi0cty/3d9WPwAjqhbUBHo+v0AAAAASUVORK5CYII=')";
+
 
 String.prototype.trim = function () {
     return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
 };
 
+
 String.prototype.rmnlns = function () {
     return this.replace(/(\r\n|\n|\r)/gm, " ");
 };
+
 
 function addcss(css){
 	
@@ -24,10 +30,12 @@ function addcss(css){
     head.appendChild(s);
 }
 
+
 function addcss_hide(tag){
 	
 	addcss(tag+'{visibility: hidden; display: none;}');
 }
+
 
 function hcc_start(){
 	
@@ -115,6 +123,7 @@ function applyformat(){
 		
 		if (sttngsarr.hcc_cllpsbrnchs_rev == '0'){
 			
+			//addcss('label.cmmtggl::before {font-weight: normal; font-size: 16px; content: "\\1f4ac "'+comtreesvg+'; vertical-align: middle; display: inline-block; width: 2em; background: #f7f7f7; text-align: center;}');
 			addcss('label.cmmtggl::before {font-weight: normal; font-size: 16px; content: "\\1f4ac h"; vertical-align: middle; display: inline-block; width: 2em; background: #f7f7f7; text-align: center;}');
 			addcss('.brtggl:checked ~ label.cmmtggl::before { content: "–";}');
 		} else {
@@ -123,6 +132,9 @@ function applyformat(){
 			addcss('.brtggl:checked ~ label.cmmtggl::before { content: "\\1f4ac h";}');
 		}
 		
+		//css styles for bottom collapse buttons
+		addcss('label.cmmtggl_frombttm::before { content: "–";}');
+				
 		for (let i=0; i < rootcmnts.length; i++ ){
 			
 			let brnchs = rootcmnts[i].querySelectorAll('ul.content-list_nested-comments');
@@ -130,11 +142,77 @@ function applyformat(){
 			for (let brnch of brnchs){
 				
 				let amnt = brnch.children.length;
-				if (amnt == 0) continue;
 				
-				if (sttngsarr.hcc_cllpsbrnchs_all == '0'){ 
-					if (brnch.parentNode.parentNode.id != "comments-list") continue;
+				//let bttmbttn = 1;
+				//if this is last comment don't do anything unless we need to create collapse from bottom button
+				if (brnch.parentNode.id == "comments-list") {continue;}
+				
+				//Habr's html code contains empty <ul> at the end of comments branch
+				if (amnt == 0) {
+					
+					//dat sheat took a lot of me and this code is smokin but not hot pile
+					if (sttngsarr.hcc_revcll_bttn == '1'){
+						
+						let tmpbr = brnch.parentNode;
+						let tmp_id = tmpbr.querySelector("span.parent_id").dataset.parent_id;
+						
+						while( tmpbr.id != "comments-list" ){
+							
+							if (tmpbr.tagName == "UL" && tmpbr.children.length > 1) { 
+								tmp_id = tmpbr.querySelector("span.parent_id").dataset.parent_id;
+								break; 
+							}
+							
+							tmpbr = tmpbr.parentNode;
+							if (tmpbr.id != "comments-list" && 
+								tmpbr.querySelector("span.parent_id").dataset.parent_id != "0") {
+									tmp_id = tmpbr.querySelector("span.parent_id").dataset.parent_id;
+								}
+						}
+						
+						if (tmp_id == 0) {continue;}
+						
+						let tmplblem = null;
+						if (tmpbr.id == "comments-list"){
+							
+							tmplblem = tmpbr.querySelectorAll("label.cmmtggl");
+						}
+						else {
+							
+							//thats ok, just 3 nodes up (ノ°Д°）ノ︵ ┻━┻ 
+							tmplblem = tmpbr.parentNode.parentNode.parentNode.querySelectorAll("label.cmmtggl");
+						}
+						
+						let tmpble = null;
+						for (let i=0; i < tmplblem.length; i++){
+							
+							//console.log(tmplblem[i].id); console.log("ltggl_reply_comments_" + tmp_id); 
+							if (tmplblem[i].id == "ltggl_reply_comments_" + tmp_id){
+									
+								tmplble = tmplblem[i];
+								break;
+							}
+						}
+							
+						if (tmplble == null) {continue;}
+						let tmpfcs = tmplble.parentNode;
+												
+						/**** CREATING ELEMENT WITH DUPLICATE ID SURE WILL GO TO XHTML HELL FOR THAT ****/
+						tmplblbttm = tmplble.cloneNode(true);
+						tmplblbttm.classList.add("cmmtggl_frombttm");
+						
+						tmplblbttm.onclick = function() { tmpfcs.scrollIntoView(); };
+						
+						brnch.parentNode.insertBefore(tmplblbttm,brnch.nextSibling);	
+					}
+					
+					//just continue
+					continue;
 				}
+				
+				if (sttngsarr.hcc_cllpsbrnchs_all == '0' &&
+					brnch.parentNode.parentNode.id != "comments-list")
+					{continue;}
 				
 				let tmpid = brnch.id;
 				
@@ -144,7 +222,20 @@ function applyformat(){
 				let tmplbl = document.createElement("label"); 
 				tmplbl.className = "cmmtggl"; tmplbl.htmlFor = "tggl_"+tmpid; tmplbl.id = "ltggl_"+tmpid;
 				
+				tmplbl.onclick = function(){document.getElementById("ltggl_"+tmpid).focus();};
+				//create button to collapse/expand branch from start
 				brnch.parentNode.insertBefore(tmpipt,brnch); brnch.parentNode.insertBefore(tmplbl,brnch);
+				
+				//create button to collapse/expand branch from end				
+				
+				/*
+				if ( amnt > 1 || brnch.parentNode.parentNode.id == "comments-list" ){
+					
+					let tmpfcs = document.getElementById("ltggl_"+tmpid).parentNode; //
+					
+					
+				}
+				*/		
 				
 				if (sttngsarr.hcc_cllpsbrnchs_rev == '0'){  
 					
@@ -157,12 +248,12 @@ function applyformat(){
 					addcss('#tggl_'+tmpid+':checked ~ #'+tmpid+'{visibility: hidden; display: none;}');
 				}
 				
+				
 				let tmpamnt = brnch.querySelectorAll('li.content-list__item_comment').length;
 				
 				addcss('#ltggl_'+tmpid+'::after {content: \"\\0020 '+tmpamnt+'\"}');
 			}
-		}
-			
+		}		
 	}
 				
 	if (sttngsarr.hcc_hidelng == '1'){ 

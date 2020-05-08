@@ -38,10 +38,24 @@ function popuphndlr(){
 					}
 					else {
 						document.getElementById("brnchssubmn").style.opacity = "0.4";
+						document.getElementById("hcc_revcll_bttn").disabled = true;	
 						document.getElementById("hcc_cllpsbrnchs_all").disabled = true;
 						document.getElementById("hcc_cllpsbrnchs_rev").disabled = true;
 					}
 				}
+				
+				
+				if (key == "hcc_revcll_bttn"){
+					
+					if (popupstngsarr[key] == '1') {
+						
+						let tmp = document.getElementById("hcc_cllpsbrnchs_all");
+						tmp.checked = true; tmp.disabled = true; 
+						tmp.style.opacity = "0.4";
+						tmp.style.cursor = "not-allowed";
+					}
+				}
+				
 				
 				if (key == "hcc_hiderate"){
 					
@@ -111,6 +125,8 @@ function localize_menu(){
 	document.getElementById('ppp_mn_3_1_ttl').title = chrome.i18n.getMessage("ppp_mn_3_1_ttl");
 	document.getElementById('ppp_mn_3_2').innerText = chrome.i18n.getMessage("ppp_mn_3_2");
 	document.getElementById('ppp_mn_3_2_ttl').title = chrome.i18n.getMessage("ppp_mn_3_2_ttl");
+	document.getElementById('ppp_mn_3_3').innerText = chrome.i18n.getMessage("ppp_mn_3_3");
+	document.getElementById('ppp_mn_3_3_ttl').title = chrome.i18n.getMessage("ppp_mn_3_3_ttl");
 	
 	document.getElementById('ppp_mn_4').innerText = chrome.i18n.getMessage("ppp_mn_4");
 	document.getElementById('ppp_mn_4_ttl').title = chrome.i18n.getMessage("ppp_mn_4_ttl");
@@ -182,6 +198,10 @@ document.getElementById("swmn").addEventListener("click", function(event){
 		var tmpstate = '0'; if (event.target.checked) tmpstate = '1';
 		
 		popupstngsarr[tmp] = tmpstate;
+		
+		//dirty, fix later
+		if (tmp == "hcc_revcll_bttn" && tmpstate == '1') {popupstngsarr['hcc_cllpsbrnchs_all'] = '1';}
+		
 		input_savestatenrld();
 	}
 	

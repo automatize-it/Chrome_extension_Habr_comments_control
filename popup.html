@@ -58,8 +58,8 @@ input.hcc_input:focus {
 </style>
 </head>
 
-<body style="height: auto;">
-<div id="main" style="width: 350px; height: auto; margin: 1em;">
+<body style="height: auto; overflow: hidden;">
+<div style="width: 300px; height: auto; margin: 1em;">
 <img src="hcc_32.png" align="left"><h2>Habr Comments Control</h2>
 
 
@@ -78,11 +78,14 @@ input.hcc_input:focus {
 	<div class="menustring" id="ppp_mn_3">Свернуть ветви </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs" type="checkbox"><label for="hcc_cllpsbrnchs" class="form-checkbox__fake"></label></div>
 </div>
 <div id="brnchssubmn">
-<div style="display: block;" id="ppp_mn_3_1_ttl"  title="Свернуть все ветви">
+<div style="display: block;" id="ppp_mn_3_1_ttl" title="Свернуть все ветви">
 	<div class="menustring sbmnstr" id="ppp_mn_3_1" style="">и дочерние </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs_all" type="checkbox"><label for="hcc_cllpsbrnchs_all" class="form-checkbox__fake"></label></div>
 </div>
-<div style="display: block;" id="ppp_mn_3_2_ttl"  title="Показывать все ветви изначально развернутыми">
+<div style="display: block;" id="ppp_mn_3_2_ttl" title="Показывать все ветви изначально развернутыми">
 	<div class="menustring sbmnstr" id="ppp_mn_3_2" style="">развернуть по умолчанию </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_cllpsbrnchs_rev" type="checkbox"><label for="hcc_cllpsbrnchs_rev" class="form-checkbox__fake"></label></div>
+</div>
+<div style="display: block;" id="ppp_mn_3_3_ttl" title="Включает кнопку в конце тредов для реверсивного сворачивания наверх. Функция в стадии бета-тестирования. Требует опцию &#34;Свернуть дочерние ветви&#34;">
+	<div class="menustring sbmnstr" id="ppp_mn_3_3" style="">(β)Оконечное сворачивание </div><div style="display: inline-block;" class="form-checkbox" value="true" ><input class="form-checkbox__real" id="hcc_revcll_bttn" type="checkbox"><label for="hcc_revcll_bttn" class="form-checkbox__fake"></label></div>
 </div>
 </div>
 

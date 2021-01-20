@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Habr comments control",
-	"version": "0.6.2",
+	"version": "0.6.3",
 	"description": "Настройки отображения информации на habr.com: свернуть ветви комментариев и пр. Add-on provides visual options for habr.com.",
 	"default_locale": "ru",
  	"icons": {

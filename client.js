@@ -313,7 +313,7 @@ function applyformat(){
 	
 	/**********************EXPERIMENTAL*************************/
 	
-	var doExprmnt = 1;
+	var doExprmnt = 0;
 	
 	if (doExprmnt == 1){
 		

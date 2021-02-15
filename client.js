@@ -312,10 +312,10 @@ function applyformat(){
 	
 	
 	/**********************EXPERIMENTAL*************************/
-	/*
-	var enblexprmnlt = 0;
 	
-	if (enblexprmnlt == 1){
+	var doExprmnt = 1;
+	
+	if (doExprmnt == 1){
 		
 		var tcmntsnms = [];
 		var tcmntsrts = [];
@@ -333,6 +333,7 @@ function applyformat(){
 			
 			if (tmpamnt.indexOf("–") != -1) {
 				
+				//wut?..
 				tmpamnt = tmpamnt.replace(/–/g,"-");
 			}
 			
@@ -348,24 +349,27 @@ function applyformat(){
 			
 			//this is index of root comment. It's not working, dunno why
 			tcmntsnms[z] = i;
+			
 			//We need max rating and mix plus-to-minus amount to count comment as interesting.
 			//So we need max amount of votes minus min plus-to-minus to be highest to count comment discussable
-			tcmntsrts[z] = (plss+mnss) - Math.abs(tmpamnt);
+			
+			tcmntsrts[z] = Math.abs(plss-mnss);
+			console.log(tcmntsrts[z]);
 							
 		}
 		
 		console.log(tcmntsnms);
-		console.log(tcmntsrts);
-		console.log("alive_end");
 		
 		let tmpln = z;
 		var endcmnts = [];
 		for (i=0; i < z+1; i++){
 			
-			let mx = Math.max.apply(null, tcmntsrts);
-			let tmpi = tcmntsrts.indexOf(mx);
+			let mn = Math.min.apply(null, tcmntsrts);
+			//can be more than one min
+			let tmpi = tcmntsrts.indexOf(mn);
 			endcmnts[i] = tcmntsnms[tmpi];
-			tcmntsrts[tmpi] = 0;
+			console.log(tcmntsrts[tmpi]);
+			tcmntsrts[tmpi] = 1000000;
 		}
 		
 		endcmnts = endcmnts.reverse();
@@ -375,13 +379,13 @@ function applyformat(){
 	
 		while (endcmnts.length > i){
 			
-			//rootdiv.insertBefore(rootcmnts[tmp], rootcmnts[i]);
-			rootdiv.insertBefore(rootcmnts[(endcmnts[i])],rootcmnts[0]);
+			//It works but not shows. Hmmm..
+			//if its rootcmnts[i], not rootcmnts[0], only first goes up
+			rootdiv.insertBefore(rootcmnts[(endcmnts[i])],rootcmnts[i]);
 			i++;
 		}
-		
 	}
-	*/
+	
 
 	if (sttngsarr.hcc_enbldvdr == '1') {
 		
